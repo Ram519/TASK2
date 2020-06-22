@@ -1,0 +1,16 @@
+FROM centos:latest
+
+
+RUN yum install wget -y &&\
+    yum install sudo -y &&\
+    yum install net-tools -y &&\
+    wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo &&\
+    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key &&\
+    yum install java-11-openjdk.x86_64 -y &&\
+    yum install jenkins -y &&\
+    yum install git -y  &&\
+    yum install initscripts -y &&\
+    yum  install /sbin/service -y &&\
+    echo -e "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+CMD sudo service jenkins start -DFOREGROUND  && /bin/bash
+EXPOSE 8080
