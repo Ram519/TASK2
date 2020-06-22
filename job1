@@ -1,0 +1,3 @@
+sudo rm -rf /host_os/job1_fetch
+sudo mkdir /host_os/job1_fetch
+sudo cp *  /host_os/job1_fetch
