@@ -1,0 +1,32 @@
+sudo chroot /host_os /bin/bash  <<"EOT"
+
+cd job1_fetch/
+
+if  ls | grep .html
+then
+if sudo docker container ls | grep html
+then
+echo "HTML Container is Running"
+fi
+elif sudo docker container ls -a | grep html
+then
+echo "Start the Container
+sudo docker start html
+else
+sudo docker container run -dit -p 5656:80 -v /job1_fetch:/var/www/html  --name html httpd
+fi
+fi
+
+
+if  ls | grep  .php
+then
+if sudo docker container ls | grep php
+echo "PHP Container is Running"
+fi
+elif sudo docker container ls -a | grep php
+then
+echo "Start the Container
+sudo docker start php
+else
+sudo docker container run -dit -p 5657:80 -v /job1_fetch:/var/www/html --name php php
+fi 
