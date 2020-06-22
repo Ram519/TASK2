@@ -1,0 +1,26 @@
+sudo chroot /host_os /bin/bash  <<"EOT"
+
+cd job1_fetch/
+
+if  ls | grep .html
+then
+status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.43.61:5656/index.html)
+fi
+
+ 
+if  ls | grep .php
+then
+status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.43.61:5657/index.php)
+fi
+
+
+
+
+if [[ $status == 200 ]]
+then
+echo "working fine" 
+exit 0
+else
+echo "not worked"
+exit 1
+fi
